@@ -96,7 +96,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenOrderFramework\ItalianDeli.csproj">
+    <ProjectReference Include="..\ItalianDeli\ItalianDeli.csproj">
       <Project>{B71DC31D-F4D4-4464-9803-B8FB9BCF93D0}</Project>
       <Name>ItalianDeli</Name>
     </ProjectReference>
