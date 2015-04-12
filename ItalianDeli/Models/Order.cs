@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using ItalianDeli.Common;
 
 namespace ItalianDeli.Models
 {
@@ -20,6 +21,9 @@ namespace ItalianDeli.Models
 
         [ScaffoldColumn(false)]
         public System.DateTime OrderDate { get; set; }
+
+        [ScaffoldColumn(false)]
+        public Status OrderStatus { get; set; }
 
         [ScaffoldColumn(false)]
         public string Username { get; set; }

@@ -19,7 +19,8 @@ namespace ItalianDeli.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ItalianDeli.Models.ApplicationDbContext context)

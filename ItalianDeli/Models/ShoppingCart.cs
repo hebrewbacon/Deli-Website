@@ -154,6 +154,9 @@ namespace ItalianDeli.Models
             // Set the order's total to the orderTotal count
             order.Total = orderTotal;
 
+            //set the initial order status
+            order.OrderStatus = Common.Status.Cooking;
+
             // Save the order
             storeDB.SaveChanges();
             // Empty the shopping cart
