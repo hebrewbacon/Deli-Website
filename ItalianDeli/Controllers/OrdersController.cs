@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
 using ItalianDeli.Models;
+using ItalianDeli.ViewModels;
 
 namespace ItalianDeli.Controllers
 {
@@ -149,6 +150,32 @@ namespace ItalianDeli.Controllers
             return View(order);
         }
 
+        // POST: Orders/Update/2
+        public async Task<ActionResult> Update(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Order order = await db.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            //update the order status
+            order.OrderStatus = Common.Status.ReadyForPickup;
+            await db.SaveChangesAsync();
+
+            //query the db again and return the list of orders wrapped in the order viewmodel
+            List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+            var orderList = new Orders
+            {
+                Order = orders
+            };
+
+            return View(orderList);
+        }
+
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -158,6 +185,18 @@ namespace ItalianDeli.Controllers
             db.Orders.Remove(order);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ViewCookOrders()
+        {
+            //query the db again and return the list of orders wrapped in the order viewmodel
+            List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+            var orderList = new Orders
+            {
+                Order = orders
+            };
+
+            return View(orderList);
         }
 
         protected override void Dispose(bool disposing)
