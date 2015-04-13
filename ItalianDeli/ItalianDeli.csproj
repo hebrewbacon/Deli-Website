@@ -275,6 +275,11 @@
     <Content Include="Images\Calzones\ham_calzone.jpg" />
     <Content Include="Images\Calzones\pepperoni_calzone.jpg" />
     <Content Include="Images\Calzones\spinach_calzone.jpg" />
+    <Content Include="Images\Desserts\brownies.jpg" />
+    <Content Include="Images\Desserts\cannoli.jpg" />
+    <Content Include="Images\Desserts\cheesecake.jpg" />
+    <Content Include="Images\Desserts\chocolate_cake.jpg" />
+    <Content Include="Images\Desserts\rice_pudding.jpg" />
     <Content Include="Images\Pasta\chicken_alfredo.jpg" />
     <Content Include="Images\Pasta\lasagna.jpg" />
     <Content Include="Images\Pasta\manicotti.jpg" />
