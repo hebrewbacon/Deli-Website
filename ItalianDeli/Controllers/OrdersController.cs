@@ -11,6 +11,8 @@ using PagedList.Mvc;
 using PagedList;
 using ItalianDeli.Models;
 using ItalianDeli.ViewModels;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace ItalianDeli.Controllers
 {
@@ -157,17 +159,37 @@ namespace ItalianDeli.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = await db.Orders.FindAsync(id);
-            if (order == null)
+            try
             {
-                return HttpNotFound();
+                Order order = await db.Orders.FindAsync(id);
+                if (order == null)
+                {
+                    return HttpNotFound();
+                }
+                //update the order status
+                order.OrderStatus = Common.Status.ReadyForPickup;
+                order.CreditCard = "123456789"; //hardcoding this until I fix it later
+                await db.SaveChangesAsync();
             }
-            //update the order status
-            order.OrderStatus = Common.Status.ReadyForPickup;
-            await db.SaveChangesAsync();
-
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Class: {0}, Property: {1}, Error: {2}", validationErrors.Entry.Entity.GetType().FullName,
+                                      validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            }
             //query the db again and return the list of orders wrapped in the order viewmodel
             List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+
+            foreach (var order in orders)
+            {
+                var orderDetails = db.OrderDetails.Where(x => x.OrderId == order.OrderId).ToList();
+                order.OrderDetails = orderDetails;
+            }
             var orderList = new Orders
             {
                 Order = orders
@@ -187,10 +209,16 @@ namespace ItalianDeli.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ViewCookOrders()
+        public ActionResult CookOrders()
         {
             //query the db again and return the list of orders wrapped in the order viewmodel
             List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+
+            foreach (var order in orders)
+            {
+                var orderDetails = db.OrderDetails.Where(x => x.OrderId == order.OrderId).ToList();
+                order.OrderDetails = orderDetails;
+            }
             var orderList = new Orders
             {
                 Order = orders

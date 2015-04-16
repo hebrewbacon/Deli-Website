@@ -23,7 +23,11 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                                @if (Request.IsAuthenticated && User.IsInRole("Cook"))
+                                {
+                                    <li>@Html.ActionLink("Orders", "CookOrders", "Orders")</li>
+                                }
+                                else if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                 {
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Area <b class="caret"></b></a>
@@ -38,15 +42,18 @@
                                         </ul>
                                     </li>
                                 }
-                                <li>@Html.ActionLink("Food", "Index", "Items")</li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">About us <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                                        <li class="divider"></li>
-                                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                                    </ul>
-                                </li>
+                                @if(!User.IsInRole("Cook"))
+                                { 
+                                    <li>@Html.ActionLink("Food", "Index", "Items")</li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">About us <b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                                            <li class="divider"></li>
+                                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                        </ul>
+                                    </li>
+                                }
                             </ul>
                             
                             @Html.Partial("_LoginPartial")
