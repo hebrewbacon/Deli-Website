@@ -21,7 +21,7 @@ namespace ItalianDeli.Models
         [ScaffoldColumn(false)]
         public int ID { get; set; }
 
-        [DisplayName("Catagorie")]
+        [DisplayName("Category")]
         public int CatagorieId { get; set; }
 
         [Required(ErrorMessage = "An Item Name is required")]

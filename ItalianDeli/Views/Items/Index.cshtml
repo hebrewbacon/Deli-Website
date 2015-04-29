@@ -82,7 +82,7 @@
 <table class="table">
     <tr>
         <th>
-            Catagorie
+            Category
         </th>
         <th>
             @Html.ActionLink("Item Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -109,7 +109,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ItemPictureUrl)
+                <img src="@Url.Content(item.ItemPictureUrl)" class="img-thumbnail" width="75" height="75" />
+                @*@Html.DisplayFor(modelItem => item.ItemPictureUrl)*@
             </td>
             <td>
                 <a href="#" class="AddLink"

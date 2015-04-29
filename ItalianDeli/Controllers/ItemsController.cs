@@ -54,13 +54,13 @@ namespace ItalianDeli.Controllers
                     items = items.OrderByDescending(s => s.Price);
                     break;
                 default:  // Name ascending 
-                    items = items.OrderBy(s => s.Name);
+                    items = items.OrderBy(s => s.Catagorie.Name);
                     break;
             }
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View( items.ToPagedList(pageNumber, pageSize));
+            return View(items.ToPagedList(pageNumber, pageSize));
 
 
             //var items = db.Items.Include(i => i.Catagorie);

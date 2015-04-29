@@ -59,6 +59,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -181,6 +182,7 @@
     <Compile Include="Controllers\AnalyticsController.cs" />
     <Compile Include="Controllers\CatagoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\DbReloadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -280,12 +282,12 @@
     <Content Include="Images\Desserts\cheesecake.jpg" />
     <Content Include="Images\Desserts\chocolate_cake.jpg" />
     <Content Include="Images\Desserts\rice_pudding.jpg" />
-    <Content Include="Images\Pasta\chicken_alfredo.jpg" />
-    <Content Include="Images\Pasta\lasagna.jpg" />
-    <Content Include="Images\Pasta\manicotti.jpg" />
-    <Content Include="Images\Pasta\ravioli.jpg" />
-    <Content Include="Images\Pasta\spaghetti.jpg" />
-    <Content Include="Images\Pasta\stuffed_shells.jpg" />
+    <Content Include="Images\Pastas\chicken_alfredo.jpg" />
+    <Content Include="Images\Pastas\lasagna.jpg" />
+    <Content Include="Images\Pastas\manicotti.jpg" />
+    <Content Include="Images\Pastas\ravioli.jpg" />
+    <Content Include="Images\Pastas\spaghetti.jpg" />
+    <Content Include="Images\Pastas\stuffed_shells.jpg" />
     <Content Include="Images\Salads\caesar_salad.jpg" />
     <Content Include="Images\Salads\chef_salad.jpg" />
     <Content Include="Images\Salads\greek_salad.jpg" />
@@ -299,13 +301,13 @@
     <Content Include="Images\Sandwiches\tuna_sandwich.jpg" />
     <Content Include="Images\Sandwiches\turkey_sandwich.jpg" />
     <Content Include="Images\Sides\buffalo_wings.jpg" />
-    <Content Include="Images\Sides\chicken nuggets.jpg" />
+    <Content Include="Images\Sides\chicken_nuggets.jpg" />
     <Content Include="Images\Sides\fries.jpg" />
     <Content Include="Images\Sides\garlic_bread.jpg" />
     <Content Include="Images\Sides\jalapeno_poppers.jpg" />
     <Content Include="Images\Sides\mozzarella_sticks.jpg" />
     <Content Include="Images\Sides\onion_rings.jpg" />
-    <Content Include="Images\Strombolis\cheese_steak_stromboli.jpg" />
+    <Content Include="Images\Strombolis\cheesesteak_stromboli.jpg" />
     <Content Include="Images\Strombolis\chicken_stromboli.jpg" />
     <Content Include="Images\Strombolis\greek_stromboli.jpg" />
     <Content Include="Images\Strombolis\italian_stromboli.jpg" />
@@ -420,6 +422,7 @@
     <Content Include="Views\Analytics\Pie2.cshtml" />
     <Content Include="Views\Manage\GuestIndex.cshtml" />
     <Content Include="Views\Orders\CookOrders.cshtml" />
+    <Content Include="Views\DbReload\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
