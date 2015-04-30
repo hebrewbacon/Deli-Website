@@ -282,6 +282,11 @@
     <Content Include="Images\Desserts\cheesecake.jpg" />
     <Content Include="Images\Desserts\chocolate_cake.jpg" />
     <Content Include="Images\Desserts\rice_pudding.jpg" />
+    <Content Include="Images\Home\all_items.jpg" />
+    <Content Include="Images\Home\deli_home.jpg" />
+    <Content Include="Images\Home\desserts.jpg" />
+    <Content Include="Images\Home\salads.jpg" />
+    <Content Include="Images\Home\sandwiches.jpg" />
     <Content Include="Images\Pastas\chicken_alfredo.jpg" />
     <Content Include="Images\Pastas\lasagna.jpg" />
     <Content Include="Images\Pastas\manicotti.jpg" />

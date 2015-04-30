@@ -40,3 +40,15 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width: 50%;
+    margin: auto;
+}
+
+#browseMenuButtonContainer {
+    padding-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+}

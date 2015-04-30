@@ -28,7 +28,7 @@ namespace ItalianDeli
                       "~/Content/bootstrap.css",
                       "~/Content/variables.less",
                       "~/Content/bootswatch.less",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

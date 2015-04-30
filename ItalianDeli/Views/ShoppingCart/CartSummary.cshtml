@@ -1,1 +1,10 @@
-﻿<a href='@Url.Action("Index", "ShoppingCart")'><strong>Cart</strong>  <span id="cart-status" class="badge">@ViewData["CartCount"]</span></a>
+﻿<a href='@Url.Action("Index", "ShoppingCart")'><strong>Cart</strong>  @*<span id="cart-status" class="badge">@ViewData["CartCount"]</span>*@
+    @if(ViewData["CartCount"] != null && (int)ViewData["CartCount"] > 0)
+    {
+        <span id="cart-status" class="badge">@ViewData["CartCount"]</span>
+    }
+    else
+    {
+        <span id="cart-status" class="badge"></span>
+    }
+</a>
