@@ -53,7 +53,7 @@ namespace ItalianDeli.Controllers
                 case "price_desc":
                     items = items.OrderByDescending(s => s.Price);
                     break;
-                default:  // Name ascending 
+                default:  // Category ascending
                     items = items.OrderBy(s => s.Catagorie.Name);
                     break;
             }

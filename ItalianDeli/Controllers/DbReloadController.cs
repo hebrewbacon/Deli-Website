@@ -121,6 +121,13 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Desserts/cannoli.jpg")
             };
 
+            Item carrotCake = new Item()
+            {
+                Name = "Carrot Cake",
+                Price = 3.99m,
+                ItemPictureUrl = Url.Content("~/Images/Desserts/carrot_cake.jpg")
+            };
+
             Item cheeseCake = new Item()
             {
                 Name = "Cheesecake",
@@ -135,6 +142,13 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Desserts/chocolate_cake.jpg")
             };
 
+            Item cookies = new Item()
+            {
+                Name = "Cookies",
+                Price = 2.99m,
+                ItemPictureUrl = Url.Content("~/Images/Desserts/cookies.jpg")
+            };
+
             Item ricePudding = new Item()
             {
                 Name = "Rice Pudding",
@@ -142,7 +156,7 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Desserts/rice_pudding.jpg")
             };
 
-            desserts.Items = new List<Item> { brownies, cannoli, cheeseCake, chocolateCake, ricePudding };
+            desserts.Items = new List<Item> { brownies, cannoli, carrotCake, cheeseCake, chocolateCake, cookies, ricePudding };
             db.Catagories.Add(desserts);
             db.SaveChanges();
         }
@@ -165,6 +179,13 @@ namespace ItalianDeli.Controllers
                 Name = "Chicken Alfredo",
                 Price = 10.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/chicken_alfredo.jpg")
+            };
+
+            Item eggplantParmesan = new Item()
+            {
+                Name = "Eggplant Parmesan",
+                Price = 10.99m,
+                ItemPictureUrl = Url.Content("~/Images/Pastas/eggplant_parmesan.jpg")
             };
 
             Item lasagna = new Item()
@@ -202,7 +223,7 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Pastas/stuffed_shells.jpg")
             };
 
-            pastas.Items = new List<Item> { chickenAlfredo, lasagna, manicotti, ravioli, spaghetti, stuffedShells };
+            pastas.Items = new List<Item> { chickenAlfredo, eggplantParmesan, lasagna, manicotti, ravioli, spaghetti, stuffedShells };
             db.Catagories.Add(pastas);
             db.SaveChanges();
         }
@@ -234,6 +255,13 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Salads/chef_salad.jpg")
             };
 
+            Item gardenSalad = new Item()
+            {
+                Name = "Garden Salad",
+                Price = 5.99m,
+                ItemPictureUrl = Url.Content("~/Images/Salads/garden_salad.jpg")
+            };
+
             Item greekSalad = new Item()
             {
                 Name = "Greek Salad",
@@ -262,7 +290,7 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Salads/tuna_salad.jpg")
             };
 
-            salads.Items = new List<Item> { caesarSalad, chefSalad, greekSalad, houseSalad, shrimpSalad, tunaSalad };
+            salads.Items = new List<Item> { caesarSalad, chefSalad, gardenSalad, greekSalad, houseSalad, shrimpSalad, tunaSalad };
             db.Catagories.Add(salads);
             db.SaveChanges();
         }
@@ -294,6 +322,13 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Sandwiches/fish_sandwich.jpg")
             };
 
+            Item grilledCheese = new Item()
+            {
+                Name = "Grilled Cheese",
+                Price = 3.99m,
+                ItemPictureUrl = Url.Content("~/Images/Sandwiches/grilled_cheese.jpg")
+            };
+
             Item hamSandwich = new Item()
             {
                 Name = "Ham Sandwich",
@@ -322,7 +357,7 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Sandwiches/turkey_Sandwich.jpg")
             };
 
-            sandwiches.Items = new List<Item> { chickenSandwich, fishSandwich, hamSandwich, roastBeefSandwich, tunaSandwich, turkeySandwich };
+            sandwiches.Items = new List<Item> { chickenSandwich, fishSandwich, grilledCheese, hamSandwich, roastBeefSandwich, tunaSandwich, turkeySandwich };
             db.Catagories.Add(sandwiches);
             db.SaveChanges();
         }

@@ -279,8 +279,10 @@
     <Content Include="Images\Calzones\spinach_calzone.jpg" />
     <Content Include="Images\Desserts\brownies.jpg" />
     <Content Include="Images\Desserts\cannoli.jpg" />
+    <Content Include="Images\Desserts\carrot_cake.jpg" />
     <Content Include="Images\Desserts\cheesecake.jpg" />
     <Content Include="Images\Desserts\chocolate_cake.jpg" />
+    <Content Include="Images\Desserts\cookies.jpg" />
     <Content Include="Images\Desserts\rice_pudding.jpg" />
     <Content Include="Images\Home\all_items.jpg" />
     <Content Include="Images\Home\deli_home.jpg" />
@@ -288,6 +290,7 @@
     <Content Include="Images\Home\salads.jpg" />
     <Content Include="Images\Home\sandwiches.jpg" />
     <Content Include="Images\Pastas\chicken_alfredo.jpg" />
+    <Content Include="Images\Pastas\eggplant_parmesan.jpg" />
     <Content Include="Images\Pastas\lasagna.jpg" />
     <Content Include="Images\Pastas\manicotti.jpg" />
     <Content Include="Images\Pastas\ravioli.jpg" />
@@ -295,12 +298,14 @@
     <Content Include="Images\Pastas\stuffed_shells.jpg" />
     <Content Include="Images\Salads\caesar_salad.jpg" />
     <Content Include="Images\Salads\chef_salad.jpg" />
+    <Content Include="Images\Salads\garden_salad.jpg" />
     <Content Include="Images\Salads\greek_salad.jpg" />
     <Content Include="Images\Salads\house_salad.jpg" />
     <Content Include="Images\Salads\shrimp_salad.jpg" />
     <Content Include="Images\Salads\tuna_salad.jpg" />
     <Content Include="Images\Sandwiches\chicken_sandwich.jpg" />
     <Content Include="Images\Sandwiches\fish_sandwich.jpg" />
+    <Content Include="Images\Sandwiches\grilled_cheese.jpg" />
     <Content Include="Images\Sandwiches\ham_sandwich.jpg" />
     <Content Include="Images\Sandwiches\roastbeef_sandwich.jpg" />
     <Content Include="Images\Sandwiches\tuna_sandwich.jpg" />
