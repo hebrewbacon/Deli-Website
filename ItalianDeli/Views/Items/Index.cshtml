@@ -106,7 +106,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                <span>$</span>@Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 <img src="@Url.Content(item.ItemPictureUrl)" class="img-thumbnail" width="75" height="75" />

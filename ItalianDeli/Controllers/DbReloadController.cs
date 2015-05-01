@@ -71,21 +71,21 @@ namespace ItalianDeli.Controllers
             Item hamCalzone = new Item()
             {
                 Name = "Ham Calzone",
-                Price = 4.99m,
+                Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Calzones/ham_calzone.jpg")
             };
 
             Item pepperoniCalzone = new Item()
             {
                 Name = "Pepperoni Calzone",
-                Price = 4.99m,
+                Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Calzones/pepperoni_calzone.jpg")
             };
 
             Item spinachCalzone = new Item()
             {
                 Name = "Spinach Calzone",
-                Price = 4.99m,
+                Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Calzones/spinach_calzone.jpg")
             };
 
@@ -110,7 +110,7 @@ namespace ItalianDeli.Controllers
             Item brownies = new Item()
             {
                 Name = "Brownies",
-                Price = 4.99m,
+                Price = 1.99m,
                 ItemPictureUrl = Url.Content("~/Images/Desserts/brownies.jpg")
             };
 
@@ -124,21 +124,21 @@ namespace ItalianDeli.Controllers
             Item cheeseCake = new Item()
             {
                 Name = "Cheesecake",
-                Price = 4.99m,
+                Price = 3.99m,
                 ItemPictureUrl = Url.Content("~/Images/Desserts/cheesecake.jpg")
             };
 
             Item chocolateCake = new Item()
             {
                 Name = "Chocolate Cake",
-                Price = 4.99m,
+                Price = 3.99m,
                 ItemPictureUrl = Url.Content("~/Images/Desserts/chocolate_cake.jpg")
             };
 
             Item ricePudding = new Item()
             {
                 Name = "Rice Pudding",
-                Price = 4.99m,
+                Price = 2.99m,
                 ItemPictureUrl = Url.Content("~/Images/Desserts/rice_pudding.jpg")
             };
 
@@ -163,42 +163,42 @@ namespace ItalianDeli.Controllers
             Item chickenAlfredo = new Item()
             {
                 Name = "Chicken Alfredo",
-                Price = 4.99m,
+                Price = 10.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/chicken_alfredo.jpg")
             };
 
             Item lasagna = new Item()
             {
                 Name = "Lasagna",
-                Price = 4.99m,
+                Price = 8.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/lasagna.jpg")
             };
 
             Item manicotti = new Item()
             {
                 Name = "Manicotti",
-                Price = 4.99m,
+                Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/manicotti.jpg")
             };
 
             Item ravioli = new Item()
             {
                 Name = "Ravioli",
-                Price = 4.99m,
+                Price = 8.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/ravioli.jpg")
             };
 
             Item spaghetti = new Item()
             {
                 Name = "Spaghetti",
-                Price = 4.99m,
+                Price = 7.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/spaghetti.jpg")
             };
 
             Item stuffedShells = new Item()
             {
                 Name = "Stuffed Shells",
-                Price = 4.99m,
+                Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Pastas/stuffed_shells.jpg")
             };
 
@@ -223,42 +223,42 @@ namespace ItalianDeli.Controllers
             Item caesarSalad = new Item()
             {
                 Name = "Caesar Salad",
-                Price = 4.99m,
+                Price = 5.99m,
                 ItemPictureUrl = Url.Content("~/Images/Salads/caesar_salad.jpg")
             };
 
             Item chefSalad = new Item()
             {
                 Name = "Chef Salad",
-                Price = 4.99m,
+                Price = 7.99m,
                 ItemPictureUrl = Url.Content("~/Images/Salads/chef_salad.jpg")
             };
 
             Item greekSalad = new Item()
             {
                 Name = "Greek Salad",
-                Price = 4.99m,
+                Price = 7.99m,
                 ItemPictureUrl = Url.Content("~/Images/Salads/greek_salad.jpg")
             };
 
             Item houseSalad = new Item()
             {
                 Name = "House Salad",
-                Price = 4.99m,
+                Price = 5.99m,
                 ItemPictureUrl = Url.Content("~/Images/Salads/house_salad.jpg")
             };
 
             Item shrimpSalad = new Item()
             {
                 Name = "Shrimp Salad",
-                Price = 4.99m,
+                Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Salads/shrimp_salad.jpg")
             };
 
             Item tunaSalad = new Item()
             {
                 Name = "Tuna Salad",
-                Price = 4.99m,
+                Price = 7.99m,
                 ItemPictureUrl = Url.Content("~/Images/Salads/tuna_salad.jpg")
             };
 
@@ -290,7 +290,7 @@ namespace ItalianDeli.Controllers
             Item fishSandwich = new Item()
             {
                 Name = "Fish Sandwich",
-                Price = 4.99m,
+                Price = 5.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sandwiches/fish_sandwich.jpg")
             };
 
@@ -304,7 +304,7 @@ namespace ItalianDeli.Controllers
             Item roastBeefSandwich = new Item()
             {
                 Name = "Roast Beef Sandwich",
-                Price = 4.99m,
+                Price = 6.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sandwiches/roastbeef_sandwich.jpg")
             };
 
@@ -343,49 +343,49 @@ namespace ItalianDeli.Controllers
             Item buffaloWings = new Item()
             {
                 Name = "Buffalo Wings",
-                Price = 4.99m,
+                Price = 6.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/buffalo_wings.jpg")
             };
 
             Item chickenNuggets = new Item()
             {
                 Name = "Chicken Nuggets",
-                Price = 4.99m,
+                Price = 3.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/chicken_nuggets.jpg")
             };
 
             Item fries = new Item()
             {
                 Name = "Fries",
-                Price = 4.99m,
+                Price = 2.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/fries.jpg")
             };
 
             Item garlicBread = new Item()
             {
                 Name = "Garlic Bread",
-                Price = 4.99m,
+                Price = 2.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/garlic_bread.jpg")
             };
 
             Item jalapenoPoppers = new Item()
             {
                 Name = "Jalapeno Poppers",
-                Price = 4.99m,
+                Price = 3.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/jalapeno_poppers.jpg")
             };
 
             Item mozzarellaSticks = new Item()
             {
                 Name = "Mozzarella Sticks",
-                Price = 4.99m,
+                Price = 3.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/mozzarella_sticks.jpg")
             };
 
             Item onionRings = new Item()
             {
                 Name = "Onion Rings",
-                Price = 4.99m,
+                Price = 2.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sides/onion_rings.jpg")
             };
 
@@ -410,28 +410,28 @@ namespace ItalianDeli.Controllers
             Item cheeseSteakStromboli = new Item()
             {
                 Name = "CheeseSteak Stromboli",
-                Price = 4.99m,
+                Price = 11.99m,
                 ItemPictureUrl = Url.Content("~/Images/Strombolis/cheesesteak_stromboli.jpg")
             };
 
             Item chickenStromboli = new Item()
             {
                 Name = "Chicken Stromboli",
-                Price = 4.99m,
+                Price = 10.99m,
                 ItemPictureUrl = Url.Content("~/Images/Strombolis/chicken_stromboli.jpg")
             };
 
             Item greekStromboli = new Item()
             {
                 Name = "Greek Stromboli",
-                Price = 4.99m,
+                Price = 12.99m,
                 ItemPictureUrl = Url.Content("~/Images/Strombolis/greek_stromboli.jpg")
             };
 
             Item italianStromboli = new Item()
             {
                 Name = "Italian Stromboli",
-                Price = 4.99m,
+                Price = 11.99m,
                 ItemPictureUrl = Url.Content("~/Images/Strombolis/italian_stromboli.jpg")
             };
 

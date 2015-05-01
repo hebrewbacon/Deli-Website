@@ -21,7 +21,7 @@
                         } else {
                             $('#item-count-' + data.DeleteId).text(data.ItemCount);
                         }
-                        $('#cart-total').text(data.CartTotal);
+                        $('#cart-total').html("<span>$</span>" + data.CartTotal);
                         $('#update-message').text(data.Message);
                         if(data.CartCount > 0)
                         {
@@ -74,7 +74,7 @@
                                 @Html.ActionLink(item.Item.Name, "Details", "Store", new { id = item.ID }, null)
                             </td>
                             <td>
-                                @item.Item.Price
+                                <span>$</span>@item.Item.Price
                             </td>
                             <td id="item-count-@item.ItemId">
                                 @item.Count
@@ -95,7 +95,7 @@
                         <td></td>
                         <td></td>
                         <td id="cart-total">
-                            @Model.CartTotal
+                            <span>$</span>@Model.CartTotal
                         </td>
                     </tr>
                 </table>

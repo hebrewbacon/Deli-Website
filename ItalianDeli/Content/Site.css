@@ -52,3 +52,7 @@ input[type="checkbox"].input-validation-error {
     margin-right: auto;
     width: 15%;
 }
+
+div.separator {
+    height: 20px;
+}
