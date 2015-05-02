@@ -25,6 +25,7 @@ namespace ItalianDeli.Controllers
             ClearItemsAndCategories();
             CreateCalzones();
             CreateDesserts();
+            CreateDrinks();
             CreatePastas();
             CreateSalads();
             CreateSandwiches();
@@ -68,11 +69,39 @@ namespace ItalianDeli.Controllers
                 return;
             }
 
+            Item bbqChickenCalzone = new Item()
+            {
+                Name = "BBQ Chicken Calzone",
+                Price = 9.99m,
+                ItemPictureUrl = Url.Content("~/Images/Calzones/bbq_chicken_calzone.jpg")
+            };
+
+            Item fourCheeseCalzone = new Item()
+            {
+                Name = "Four Cheese Calzone",
+                Price = 9.99m,
+                ItemPictureUrl = Url.Content("~/Images/Calzones/four_cheese_calzone.jpg")
+            };
+
             Item hamCalzone = new Item()
             {
                 Name = "Ham Calzone",
                 Price = 9.99m,
                 ItemPictureUrl = Url.Content("~/Images/Calzones/ham_calzone.jpg")
+            };
+
+            Item houseCalzone = new Item()
+            {
+                Name = "House Calzone",
+                Price = 9.99m,
+                ItemPictureUrl = Url.Content("~/Images/Calzones/house_calzone.jpg")
+            };
+
+            Item mushroomCheeseburgerCalzone = new Item()
+            {
+                Name = "Mushroom Cheeseburger Calzone",
+                Price = 9.99m,
+                ItemPictureUrl = Url.Content("~/Images/Calzones/mushroom_cheeseburger_calzone.jpg")
             };
 
             Item pepperoniCalzone = new Item()
@@ -89,7 +118,8 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Calzones/spinach_calzone.jpg")
             };
 
-            calzones.Items = new List<Item> { hamCalzone, pepperoniCalzone, spinachCalzone };
+            calzones.Items = new List<Item> { bbqChickenCalzone, fourCheeseCalzone, hamCalzone, houseCalzone, 
+                mushroomCheeseburgerCalzone, pepperoniCalzone, spinachCalzone };
             db.Catagories.Add(calzones);
             db.SaveChanges();
         }
@@ -158,6 +188,73 @@ namespace ItalianDeli.Controllers
 
             desserts.Items = new List<Item> { brownies, cannoli, carrotCake, cheeseCake, chocolateCake, cookies, ricePudding };
             db.Catagories.Add(desserts);
+            db.SaveChanges();
+        }
+
+        private void CreateDrinks()
+        {
+            Catagorie drinks = new Catagorie()
+            {
+                Name = "Drinks"
+            };
+
+            if (db.Catagories.Any(c => c.Name == drinks.Name))
+            {
+                //Don't create drinks category if it already exists
+                return;
+            }
+
+            Item soda12oz = new Item()
+            {
+                Name = "12oz Soda",
+                Price = 1.49m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/12oz_soda.jpg")
+            };
+
+            Item fountainSoda = new Item()
+            {
+                Name = "Fountain Soda",
+                Price = 1.79m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/fountain_soda.jpg")
+            };
+
+            Item Soda20oz = new Item()
+            {
+                Name = "20oz Soda",
+                Price = 1.99m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/20oz_soda.jpg")
+            };
+
+            Item Soda2Litre = new Item()
+            {
+                Name = "2-liter Soda",
+                Price = 3.99m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/2_liter_soda.jpg")
+            };
+
+            Item beer6Pack = new Item()
+            {
+                Name = "6-pack Beer",
+                Price = 9.99m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/6_pack_beer.jpg")
+            };
+
+            Item caseOfBeer = new Item()
+            {
+                Name = "Case of beer",
+                Price = 15.99m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/case_of_beer.jpg")
+            };
+
+            Item wineBottle = new Item()
+            {
+                Name = "Wine bottle",
+                Price = 10.99m,
+                ItemPictureUrl = Url.Content("~/Images/Drinks/bottle_of_wine.jpg")
+            };
+
+            drinks.Items = new List<Item> { soda12oz, fountainSoda, Soda20oz, Soda2Litre, beer6Pack, caseOfBeer, wineBottle };
+            db.Catagories.Add(drinks);
             db.SaveChanges();
         }
 
@@ -324,7 +421,7 @@ namespace ItalianDeli.Controllers
 
             Item grilledCheese = new Item()
             {
-                Name = "Grilled Cheese",
+                Name = "Grilled Cheese Sandwich",
                 Price = 3.99m,
                 ItemPictureUrl = Url.Content("~/Images/Sandwiches/grilled_cheese.jpg")
             };
@@ -357,7 +454,8 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Sandwiches/turkey_Sandwich.jpg")
             };
 
-            sandwiches.Items = new List<Item> { chickenSandwich, fishSandwich, grilledCheese, hamSandwich, roastBeefSandwich, tunaSandwich, turkeySandwich };
+            sandwiches.Items = new List<Item> { chickenSandwich, fishSandwich, grilledCheese, hamSandwich, roastBeefSandwich, 
+                tunaSandwich, turkeySandwich };
             db.Catagories.Add(sandwiches);
             db.SaveChanges();
         }
@@ -424,7 +522,8 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Sides/onion_rings.jpg")
             };
 
-            sides.Items = new List<Item> { buffaloWings, chickenNuggets, fries, garlicBread, jalapenoPoppers, mozzarellaSticks, onionRings };
+            sides.Items = new List<Item> { buffaloWings, chickenNuggets, fries, garlicBread, jalapenoPoppers, mozzarellaSticks, 
+                onionRings };
             db.Catagories.Add(sides);
             db.SaveChanges();
         }
@@ -441,6 +540,20 @@ namespace ItalianDeli.Controllers
                 //Don't create strombolis category if it already exists
                 return;
             }
+
+            Item broccoliCheeseStromboli = new Item()
+            {
+                Name = "Broccoli Cheese Stromboli",
+                Price = 11.99m,
+                ItemPictureUrl = Url.Content("~/Images/Strombolis/broccoli_cheese_stromboli.jpg")
+            };
+
+            Item cheeseburgerStromboli = new Item()
+            {
+                Name = "Cheeseburger Stromboli",
+                Price = 11.99m,
+                ItemPictureUrl = Url.Content("~/Images/Strombolis/cheeseburger_stromboli.jpg")
+            };
 
             Item cheeseSteakStromboli = new Item()
             {
@@ -470,7 +583,15 @@ namespace ItalianDeli.Controllers
                 ItemPictureUrl = Url.Content("~/Images/Strombolis/italian_stromboli.jpg")
             };
 
-            strombolis.Items = new List<Item> { cheeseSteakStromboli, chickenStromboli, greekStromboli, italianStromboli };
+            Item meatballStromboli = new Item()
+            {
+                Name = "Meatball Stromboli",
+                Price = 11.99m,
+                ItemPictureUrl = Url.Content("~/Images/Strombolis/meatball_stromboli.jpg")
+            };
+
+            strombolis.Items = new List<Item> { broccoliCheeseStromboli, cheeseburgerStromboli, cheeseSteakStromboli, 
+                chickenStromboli, greekStromboli, italianStromboli, meatballStromboli };
             db.Catagories.Add(strombolis);
             db.SaveChanges();
         }
