@@ -49,8 +49,6 @@ namespace ItalianDeli.Migrations
 
             roleCook.Create(new IdentityRole { Name = "Delivery" });
             userManager.AddToRole(cook.Id, "Delivery");
-
-            context.SaveChanges();
         }
     }
 }
