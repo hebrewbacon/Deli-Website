@@ -341,8 +341,10 @@
     <Content Include="Content\bootswatch.less" />
     <Content Include="Content\variables.less" />
     <Content Include="Content\datepicker.less" />
-    <None Include="Properties\PublishProfiles\orderframework.pubxml" />
     <Content Include="Scripts\card.js" />
+    <None Include="Properties\PublishProfiles\Azure.pubxml" />
+    <None Include="Properties\PublishProfiles\DosgDeli.pubxml" />
+    <None Include="Properties\PublishProfiles\Publish1.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\d3.js" />
     <Content Include="Scripts\d3.min.js" />
