@@ -1,7 +1,30 @@
-@{
-    ViewBag.Title = "Your order isnt complete yet..";
+@*@{
+    ViewBag.Title = "Your registration isn't complete yet..";
 }
 <h2>@ViewBag.Title.</h2>
 <p class="text-info">
     Please check your email and confirm your email address then login and complete your order.
+</p>*@
+
+
+@* Figure it will be easier to assume registration is valid and not have to wait on user email verification...just for demo purposes.
+    Of course in real-world app you would want to verify email with sending the link as done above, but since this is just demo
+    this will be quicker and easier.*@
+
+@{
+    ViewBag.Title = "Your registration is complete!";
+}
+<h2>@ViewBag.Title</h2>
+<p class="text-info">
+    Please wait to be redirected to login page where you can now login.
 </p>
+
+<script type="text/javascript">
+    $(function () {
+        // Document.ready -> redirect to login page after 3 seconds
+        setTimeout(function () {
+            var targetUrl = '/Account/LogIn/';
+            window.location.href = targetUrl;
+        }, 3000);
+    });
+</script>

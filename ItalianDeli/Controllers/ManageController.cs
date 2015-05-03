@@ -51,10 +51,13 @@ namespace ItalianDeli.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+            var user = UserManager.FindById(User.Identity.GetUserId());
             var model = new IndexViewModel
             {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(User.Identity.GetUserId()),
+                PhoneNumber = user.Phone,
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId()),
                 Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId()),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
