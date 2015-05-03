@@ -8,6 +8,7 @@ namespace ItalianDeli.Common
     public enum Status
     {
         Cooking = 0,
-        ReadyForPickup = 1
+        ReadyForPickup = 1,
+        Complete = 2
     }
 }

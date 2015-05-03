@@ -25,30 +25,30 @@ namespace ItalianDeli.Migrations
 
         protected override void Seed(ItalianDeli.Models.ApplicationDbContext context)
         {
-            var roleStore = new RoleStore<IdentityRole>(context);
-            var roleManager = new RoleManager<IdentityRole>(roleStore);
-            var roleCook = new RoleManager<IdentityRole>(roleStore);
-            var roleDelivery = new RoleManager<IdentityRole>(roleStore);
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-            var user = new ApplicationUser { UserName = "admin@gmail.com" };
-            var cook = new ApplicationUser { UserName = "cook@gmail.com" };
-            var delivery = new ApplicationUser { UserName = "delivery@gmail.com" };
-            var guestUser = new ApplicationUser { UserName = "guest@guest.com" };
+            //var roleStore = new RoleStore<IdentityRole>(context);
+            //var roleManager = new RoleManager<IdentityRole>(roleStore);
+            //var roleCook = new RoleManager<IdentityRole>(roleStore);
+            //var roleDelivery = new RoleManager<IdentityRole>(roleStore);
+            //var userStore = new UserStore<ApplicationUser>(context);
+            //var userManager = new UserManager<ApplicationUser>(userStore);
+            //var user = new ApplicationUser { UserName = "admin@gmail.com" };
+            //var cook = new ApplicationUser { UserName = "cook@gmail.com" };
+            //var delivery = new ApplicationUser { UserName = "delivery@gmail.com" };
+            //var guestUser = new ApplicationUser { UserName = "guest@guest.com" };
 
-            userManager.Create(user, "abc123"); //strong password!#@$!
-            userManager.Create(guestUser, "guest1"); //strong password!#@$!
-            userManager.Create(cook, "abc123");
-            userManager.Create(delivery, "abc123");
+            //userManager.Create(user, "abc123"); //strong password!#@$!
+            //userManager.Create(guestUser, "guest1"); //strong password!#@$!
+            //userManager.Create(cook, "abc123");
+            //userManager.Create(delivery, "abc123");
 
-            roleManager.Create(new IdentityRole { Name = "Admin" });
-            userManager.AddToRole(user.Id, "Admin");
+            //roleManager.Create(new IdentityRole { Name = "Admin" });
+            //userManager.AddToRole(user.Id, "Admin");
 
-            roleCook.Create(new IdentityRole { Name = "Cook" });
-            userManager.AddToRole(cook.Id, "Cook");
+            //roleCook.Create(new IdentityRole { Name = "Cook" });
+            //userManager.AddToRole(cook.Id, "Cook");
 
-            roleCook.Create(new IdentityRole { Name = "Delivery" });
-            userManager.AddToRole(cook.Id, "Delivery");
+            //roleCook.Create(new IdentityRole { Name = "Delivery" });
+            //userManager.AddToRole(cook.Id, "Delivery");
         }
     }
 }
