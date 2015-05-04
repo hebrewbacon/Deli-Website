@@ -25,9 +25,13 @@
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                @if (Request.IsAuthenticated && (User.IsInRole("Cook") || User.IsInRole("Delivery")))
+                                @if (Request.IsAuthenticated && User.IsInRole("Cook"))
                                 {
                                     <li>@Html.ActionLink("Orders", "CookOrders", "Orders")</li>
+                                }
+                                else if (Request.IsAuthenticated && User.Identity.Name == "delivery@gmail.com")
+                                {
+                                    <li>@Html.ActionLink("Orders", "DeliveryOrders", "Orders")</li>
                                 }
                                 else if (Request.IsAuthenticated && User.IsInRole("Admin"))
                                 {
@@ -44,7 +48,7 @@
                                         </ul>
                                     </li>
                                 }
-                                @if(!User.IsInRole("Cook") || !User.IsInRole("Delivery"))
+                                @if(!User.IsInRole("Cook") && User.Identity.Name != "delivery@gmail.com")
                                 { 
                                     <li>@Html.ActionLink("Food", "Index", "Items")</li>
                                     <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
