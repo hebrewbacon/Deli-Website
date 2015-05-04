@@ -129,7 +129,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Order.Experation, htmlAttributes: new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-10">
-                    @Html.EditorFor(model => model.Order.Experation, new { placeholder = "mm/dd/yyyy"})
+                    @Html.EditorFor(model => model.Order.Experation, new { htmlAttributes = new { @class = "form-control", placeholder = "mm/dd/yyyy" } })
                     @Html.ValidationMessageFor(model => model.Order.Experation, "", new { @class = "text-danger" })
                 </div>
             </div>
