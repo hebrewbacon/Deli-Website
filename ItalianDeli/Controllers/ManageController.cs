@@ -6,12 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ItalianDeli.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
+        ApplicationDbContext storeDB = new ApplicationDbContext();
+
         public ManageController()
         {
         }
@@ -49,6 +52,7 @@ namespace ItalianDeli.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "The phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ProfileUpdateSuccess ? "Your profile has been updated."
                 : "";
 
             var currentUser = UserManager.FindById(User.Identity.GetUserId());
@@ -61,6 +65,49 @@ namespace ItalianDeli.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
             };
             return View(model);
+        }
+
+        public async Task<ActionResult> Edit()
+        {
+            var currentUser = UserManager.FindById(User.Identity.GetUserId());
+            var model = new IndexViewModel
+            {
+                User = currentUser,
+                HasPassword = HasPassword(),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(User.Identity.GetUserId()),
+                Logins = await UserManager.GetLoginsAsync(User.Identity.GetUserId()),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(IndexViewModel indexViewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+                var ctx = store.Context;
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+
+                currentUser.Address = indexViewModel.User.Address;
+                currentUser.City = indexViewModel.User.City;
+                currentUser.State = indexViewModel.User.State;
+                currentUser.Phone = indexViewModel.User.Phone;
+                currentUser.PostalCode = indexViewModel.User.PostalCode;
+                currentUser.FirstName = indexViewModel.User.FirstName;
+                currentUser.LastName = indexViewModel.User.LastName;
+
+                //Save this back
+                //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
+                //var result = await UserManager.UpdateAsync(currentUser);
+                ctx.SaveChanges();
+
+                storeDB.SaveChanges();
+                return RedirectToAction("Index", new { message = ManageMessageId.ProfileUpdateSuccess });
+            }
+            return View(indexViewModel);
         }
 
         //
@@ -458,6 +505,7 @@ namespace ItalianDeli.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ProfileUpdateSuccess,
             Error
         }
 

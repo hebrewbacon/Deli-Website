@@ -449,6 +449,7 @@
     <Content Include="Views\Orders\CookOrders.cshtml" />
     <Content Include="Views\DbReload\Index.cshtml" />
     <Content Include="Views\Orders\DeliveryOrders.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

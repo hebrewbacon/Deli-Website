@@ -1,0 +1,76 @@
+﻿@model ItalianDeli.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage your account";
+}
+
+<h2>@ViewBag.Title.</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+@using (Html.BeginForm(new { @class = "form-horizontal" }))
+{
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "First Name" } })
+            @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.LastName, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.LastName, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Last Name" } })
+            @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Address, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.Address, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Street Address" } })
+            @Html.ValidationMessageFor(model => model.User.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.City, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.City, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "City" } })
+            @Html.ValidationMessageFor(model => model.User.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.State, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.State, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "State" } })
+            @Html.ValidationMessageFor(model => model.User.State, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.PostalCode, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.PostalCode, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Zip Code" } })
+            @Html.ValidationMessageFor(model => model.User.PostalCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.User.Phone, htmlAttributes: new { @class = "col-lg-2 control-label" })
+        <div class="col-lg-10">
+            @Html.EditorFor(model => model.User.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text", @placeholder = "Phone Number" } })
+            @Html.ValidationMessageFor(model => model.User.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-8">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+}
