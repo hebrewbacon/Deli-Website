@@ -91,20 +91,14 @@ namespace ItalianDeli.Controllers
                 var ctx = store.Context;
                 var currentUser = manager.FindById(User.Identity.GetUserId());
 
+                currentUser.FirstName = indexViewModel.User.FirstName;
+                currentUser.LastName = indexViewModel.User.LastName;
                 currentUser.Address = indexViewModel.User.Address;
                 currentUser.City = indexViewModel.User.City;
                 currentUser.State = indexViewModel.User.State;
                 currentUser.Phone = indexViewModel.User.Phone;
                 currentUser.PostalCode = indexViewModel.User.PostalCode;
-                currentUser.FirstName = indexViewModel.User.FirstName;
-                currentUser.LastName = indexViewModel.User.LastName;
-
-                //Save this back
-                //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
-                //var result = await UserManager.UpdateAsync(currentUser);
-                ctx.SaveChanges();
-
-                storeDB.SaveChanges();
+                manager.Update(currentUser);
                 return RedirectToAction("Index", new { message = ManageMessageId.ProfileUpdateSuccess });
             }
             return View(indexViewModel);
