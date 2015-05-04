@@ -51,7 +51,12 @@
                                 @if(!User.IsInRole("Cook") && User.Identity.Name != "delivery@gmail.com")
                                 { 
                                     <li>@Html.ActionLink("Food", "Index", "Items")</li>
-                                    <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                                    if(Request.IsAuthenticated && User.Identity.Name != "guest@guest.com")
+                                    {
+                                        @*Only show orders history link for logged in users who are not logged is as guest I guess,
+                                          other it will show history of all guest logins orders which I don't think we want.*@
+                                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                                    }
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">About us <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
