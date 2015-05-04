@@ -4,7 +4,7 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right" style="padding-right:25px">
-            @if (!User.IsInRole("Cook") || !User.IsInRole("Delivery")) { 
+            @if (!User.IsInRole("Cook") && User.Identity.Name != "delivery@gmail.com") { 
                 <li class="active">@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                 <li>
                     @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })

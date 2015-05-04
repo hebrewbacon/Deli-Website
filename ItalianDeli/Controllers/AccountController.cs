@@ -111,6 +111,14 @@ namespace ItalianDeli.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    if (model.Email == "cook@gmail.com")
+                    {
+                        RedirectToAction("CookOrders", "Orders");
+                    }
+                    else if (model.Email == "delivery@gmail.com")
+                    {
+                        RedirectToLocal("Orders/DeliveryOrders");
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
