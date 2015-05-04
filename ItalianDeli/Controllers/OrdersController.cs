@@ -38,7 +38,7 @@ namespace ItalianDeli.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var orders = from o in db.Orders
+            var orders = from o in db.Orders.Where(x => x.Username == User.Identity.Name)
                         select o;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -177,6 +177,27 @@ namespace ItalianDeli.Controllers
                 }
                 order.CreditCard = "123456789"; //hardcoding this until I fix it later
                 await db.SaveChangesAsync();
+
+                //query the db again and return the list of orders wrapped in the order viewmodel
+                List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+
+                foreach (var ord in orders)
+                {
+                    var orderDetails = db.OrderDetails.Where(x => x.OrderId == ord.OrderId).ToList();
+                    ord.OrderDetails = orderDetails;
+                }
+                var orderList = new Orders
+                {
+                    Order = orders
+                };
+                if (order.OrderStatus == Common.Status.ReadyForPickup)
+                {
+                    return View("CookOrders", orderList);
+                }
+                else
+                {
+                    return View("DeliveryOrders", orderList);
+                }
             }
             catch (DbEntityValidationException dbEx)
             {
@@ -189,20 +210,7 @@ namespace ItalianDeli.Controllers
                     }
                 }
             }
-            //query the db again and return the list of orders wrapped in the order viewmodel
-            List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
-
-            foreach (var order in orders)
-            {
-                var orderDetails = db.OrderDetails.Where(x => x.OrderId == order.OrderId).ToList();
-                order.OrderDetails = orderDetails;
-            }
-            var orderList = new Orders
-            {
-                Order = orders
-            };
-
-            return View(orderList);
+            return null;
         }
 
         // POST: Orders/Delete/5
