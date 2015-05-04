@@ -36,6 +36,10 @@
             Zip Code: @Model.User.PostalCode
         </p>
         <p>
+            Phone Number: @Model.User.Phone
+        </p>
+        @*Nice to have feature below commented out to give simpler look and feel I guess.*@
+        @*<p>
             Phone Number: @(Model.User.Phone ?? "None") [
             @if (Model.User.Phone != null)
             {
@@ -48,8 +52,7 @@
             }
             ]
         </p>
-        @*Nice to have feature below commented out to give simpler look and feel I guess.*@
-        @*<p>
+        <p>
             External Logins: @Model.Logins.Count
             @Html.ActionLink("[Manage]", "ManageLogins")
         </p>
