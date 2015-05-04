@@ -8,22 +8,37 @@
 <div class="row">
     <div class="col-md-8">
         <p>
-            First Name: @Model.FirstName
-        </p>
-        <p>
-            Last Name: @Model.LastName
-        </p>
-        <p>
-            @if (Model.HasPassword) {
+            @if (Model.HasPassword)
+            {
                 @Html.ActionLink("Change your password", "ChangePassword")
             }
-            else {
+            else
+            {
                 @Html.ActionLink("Pick a password", "SetPassword")
             }
         </p>
         <p>
-            Phone Number: @(Model.PhoneNumber ?? "None") [
-            @if (Model.PhoneNumber != null) {
+            First Name: @Model.User.FirstName
+        </p>
+        <p>
+            Last Name: @Model.User.LastName
+        </p>
+        <p>
+            Address: @Model.User.Address
+        </p>
+        <p>
+            City: @Model.User.City
+        </p>
+        <p>
+            State: @Model.User.State
+        </p>
+        <p>
+            Zip Code: @Model.User.PostalCode
+        </p>
+        <p>
+            Phone Number: @(Model.User.Phone ?? "None") [
+            @if (Model.User.Phone != null)
+            {
                 @Html.ActionLink("Change", "AddPhoneNumber")
                 @: &nbsp;|&nbsp;
                 @Html.ActionLink("Remove", "RemovePhoneNumber")

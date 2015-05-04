@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ItalianDeli.Controllers
 {
@@ -25,10 +26,13 @@ namespace ItalianDeli.Controllers
         public ActionResult AddressAndPayment()
         {
             ViewBag.CreditCardTypes = CreditCardTypes;
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = userManager.FindById(User.Identity.GetUserId());
             var previousOrder = storeDB.Orders.FirstOrDefault(x => x.Username == User.Identity.Name);
+            CheckoutViewModel checkoutViewModel = new CheckoutViewModel { User = user, Order = previousOrder };
 
-            if (previousOrder != null)
-                return View(previousOrder);
+            if (previousOrder != null || user != null)
+                return View(checkoutViewModel);
             else
                 return View();
         }
@@ -40,19 +44,32 @@ namespace ItalianDeli.Controllers
         {
             ViewBag.CreditCardTypes = CreditCardTypes;
             string result =  values[9];
-            
-            var order = new Order();
-            TryUpdateModel(order);
-            order.CreditCard = result;
+
+            var checkoutViewModel = new CheckoutViewModel();
+            TryUpdateModel(checkoutViewModel);
+            checkoutViewModel.Order.CreditCard = result;
 
             try
             {
-                    order.Username = User.Identity.Name;
-                    order.Email = User.Identity.Name;
-                    order.OrderDate = DateTime.Now;
-                    var currentUserId = User.Identity.GetUserId();
+                    checkoutViewModel.Order.Username = User.Identity.Name;
+                    checkoutViewModel.Order.Email = User.Identity.Name;
+                    checkoutViewModel.Order.OrderDate = DateTime.Now;
 
-                    if (order.SaveInfo && !order.Username.Equals("guest@guest.com"))
+                    /*
+                     * Alot of repition but just added this to make saving to db work coz without it its throwing exception
+                     * errors for required fields
+                     */ 
+                    checkoutViewModel.Order.Address = checkoutViewModel.User.Address;
+                    checkoutViewModel.Order.City = checkoutViewModel.User.City;
+                    checkoutViewModel.Order.Country = checkoutViewModel.User.Country;
+                    checkoutViewModel.Order.State = checkoutViewModel.User.State;
+                    checkoutViewModel.Order.Phone = checkoutViewModel.User.Phone;
+                    checkoutViewModel.Order.PostalCode = checkoutViewModel.User.PostalCode;
+                    checkoutViewModel.Order.FirstName = checkoutViewModel.User.FirstName;
+                    checkoutViewModel.Order.LastName = checkoutViewModel.User.LastName;
+
+                    var currentUserId = User.Identity.GetUserId();
+                    if (checkoutViewModel.Order.SaveInfo && !checkoutViewModel.Order.Username.Equals("guest@guest.com"))
                     {
                         
                         var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -60,13 +77,14 @@ namespace ItalianDeli.Controllers
                         var ctx = store.Context;
                         var currentUser = manager.FindById(User.Identity.GetUserId());
 
-                        currentUser.Address = order.Address;
-                        currentUser.City = order.City;
-                        currentUser.Country = order.Country;
-                        currentUser.State = order.State;
-                        currentUser.Phone = order.Phone;
-                        currentUser.PostalCode = order.PostalCode;
-                        currentUser.FirstName = order.FirstName;
+                        currentUser.Address = checkoutViewModel.User.Address;
+                        currentUser.City = checkoutViewModel.User.City;
+                        currentUser.Country = checkoutViewModel.User.Country;
+                        currentUser.State = checkoutViewModel.User.State;
+                        currentUser.Phone = checkoutViewModel.User.Phone;
+                        currentUser.PostalCode = checkoutViewModel.User.PostalCode;
+                        currentUser.FirstName = checkoutViewModel.User.FirstName;
+                        currentUser.LastName = checkoutViewModel.User.LastName;
 
                         //Save this back
                         //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
@@ -78,24 +96,37 @@ namespace ItalianDeli.Controllers
                     
 
                     //Save Order
-                    storeDB.Orders.Add(order);
+                    storeDB.Orders.Add(checkoutViewModel.Order);
                     await storeDB.SaveChangesAsync();
                     //Process the order
                     var cart = ShoppingCart.GetCart(this.HttpContext);
-                    order = cart.CreateOrder(order);
+                    checkoutViewModel.Order = cart.CreateOrder(checkoutViewModel.Order);
 
 
 
-                    CheckoutController.SendOrderMessage(order.FirstName, "New Order: " + order.OrderId,order.ToString(order), appConfig.OrderEmail);
+                    CheckoutController.SendOrderMessage(checkoutViewModel.Order.FirstName, "New Order: " + checkoutViewModel.Order.OrderId, checkoutViewModel.Order.ToString(checkoutViewModel.Order), appConfig.OrderEmail);
 
                     return RedirectToAction("Complete",
-                        new { id = order.OrderId });
+                        new { id = checkoutViewModel.Order.OrderId });
                 
             }
-            catch
+            catch(Exception ex)
             {
+                if (ex is System.Data.Entity.Validation.DbEntityValidationException)
+                {
+                    // Retrieve the error messages as a list of strings.
+                    var errorMessages = (ex as System.Data.Entity.Validation.DbEntityValidationException).EntityValidationErrors
+                            .SelectMany(x => x.ValidationErrors)
+                            .Select(x => x.ErrorMessage);
+
+                    // Join the list to a single string.
+                    var fullErrorMessage = string.Join("; ", errorMessages);
+
+                    // Combine the original exception message with the new one.
+                    var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
+                }
                 //Invalid - redisplay with errors
-                return View(order);
+                return View(checkoutViewModel);
             }
         }
 

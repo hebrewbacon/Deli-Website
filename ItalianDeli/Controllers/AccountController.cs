@@ -186,7 +186,8 @@ namespace ItalianDeli.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, 
-                    LastName = model.LastName, Phone = model.PhoneNumber };
+                    LastName = model.LastName, Phone = model.PhoneNumber, Address = model.Address, City = model.City,
+                    State = model.State, PostalCode = model.ZipCode, Country = "USA" };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
