@@ -167,7 +167,14 @@ namespace ItalianDeli.Controllers
                     return HttpNotFound();
                 }
                 //update the order status
-                order.OrderStatus = Common.Status.ReadyForPickup;
+                if (order.OrderStatus == Common.Status.Cooking)
+                {
+                    order.OrderStatus = Common.Status.ReadyForPickup;
+                }
+                else if (order.OrderStatus == Common.Status.ReadyForPickup)
+                {
+                    order.OrderStatus = Common.Status.Complete;
+                }
                 order.CreditCard = "123456789"; //hardcoding this until I fix it later
                 await db.SaveChangesAsync();
             }
@@ -213,6 +220,24 @@ namespace ItalianDeli.Controllers
         {
             //query the db again and return the list of orders wrapped in the order viewmodel
             List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+
+            foreach (var order in orders)
+            {
+                var orderDetails = db.OrderDetails.Where(x => x.OrderId == order.OrderId).ToList();
+                order.OrderDetails = orderDetails;
+            }
+            var orderList = new Orders
+            {
+                Order = orders
+            };
+
+            return View(orderList);
+        }
+
+        public ActionResult DeliveryOrders()
+        {
+            //query the db again and return the list of orders wrapped in the order viewmodel
+            List<Order> orders = db.Orders.Where(x => (int)x.OrderStatus == 1).ToList();
 
             foreach (var order in orders)
             {

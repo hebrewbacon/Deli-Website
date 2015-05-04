@@ -9,9 +9,9 @@
 <table class="table table-striped table-hover">
     @foreach (var item in Model.Order)
     {
-        if (item.OrderStatus == ItalianDeli.Common.Status.Cooking) { 
+        if (item.OrderStatus == ItalianDeli.Common.Status.ReadyForPickup) { 
             foreach (var itemdetail in item.OrderDetails)
-            {  
+            {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => itemdetail.Item.Name)
