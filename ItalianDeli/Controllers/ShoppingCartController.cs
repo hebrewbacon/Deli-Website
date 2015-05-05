@@ -56,6 +56,24 @@ namespace ItalianDeli.Controllers
             // Go back to the main store page for more shopping
            // return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult UpdateCart(int id, int quantity)
+        {
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            int count = cart.UpdateCart(id, quantity);
+
+            // Set up our ViewModel
+            var viewModel = new ShoppingCartViewModel
+            {
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetTotal()
+            };
+            return View("Index", viewModel);
+        }
+
+
         //
         // AJAX: /ShoppingCart/RemoveFromCart/5
         [HttpPost]

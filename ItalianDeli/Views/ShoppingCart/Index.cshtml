@@ -34,6 +34,12 @@
                     });
             }
         });
+
+        $(".UpdateLink").click(function () {
+            var recordToUpdate = $(this).attr("data-id");
+            var quantity = $("#CartQuantity").val();
+            $.post("/ShoppingCart/UpdateCart", { "id": recordToUpdate, "quantity": quantity });
+        });
     });
 </script>
 <h3>
@@ -76,8 +82,17 @@
                             <td>
                                 <span>$</span>@item.Item.Price
                             </td>
-                            <td id="item-count-@item.ItemId">
+                            @*<td id="item-count-@item.ItemId">
                                 @item.Count
+                            </td>*@
+                            <td id="item-count-@item.ItemId">
+                                @Html.TextBox("CartQuantity", @item.Count)
+                            </td>
+                            <td>
+                                <a href="#" class="UpdateLink"
+                                   data-id="@item.ItemId">
+                                    Update Quantity
+                                </a>
                             </td>
                             <td>
                                 <a href="#" class="RemoveLink"
