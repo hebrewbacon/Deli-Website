@@ -38,7 +38,20 @@
         $(".UpdateLink").click(function () {
             var recordToUpdate = $(this).attr("data-id");
             var quantity = $("#CartQuantity").val();
-            $.post("/ShoppingCart/UpdateCart", { "id": recordToUpdate, "quantity": quantity });
+            $.post("/ShoppingCart/UpdateCart", { "id": recordToUpdate, "quantity": quantity },
+                function (data) {
+                    if (data.ItemCount == 0) {
+                        $('#row-' + data.DeleteId).fadeOut('slow');
+                    }
+                    $('#cart-total').html("<span>$</span>" + data.CartTotal);
+                    $('#update-message').text(data.Message);
+                    if (data.CartCount > 0) {
+                        $('#cart-status').text(data.CartCount);
+                    }
+                    else {
+                        $('#cart-status').text('');
+                    }
+                });
         });
     });
 </script>

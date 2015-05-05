@@ -62,15 +62,29 @@ namespace ItalianDeli.Controllers
         {
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
-            int count = cart.UpdateCart(id, quantity);
-
-            // Set up our ViewModel
-            var viewModel = new ShoppingCartViewModel
+            if (quantity == 0)
             {
-                CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
-            };
-            return View("Index", viewModel);
+                return RemoveFromCart(id);
+            }
+            else
+            {
+                string itemName = storeDB.Items
+                    .Single(item => item.ID == id).Name;
+
+                int itemCount = cart.UpdateCart(id, quantity);
+
+                // Set up our ViewModel
+                var results = new ShoppingCartUpdateViewModel
+                {
+                    Message = Server.HtmlEncode(itemName) +
+                        " has updated in your shopping cart.",
+                    CartTotal = cart.GetTotal(),
+                    CartCount = cart.GetCount(),
+                    ItemCount = itemCount,
+                    DeleteId = id
+                };
+                return Json(results);
+            }
         }
 
 

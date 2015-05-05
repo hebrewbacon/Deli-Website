@@ -262,6 +262,7 @@
     <Compile Include="ViewModels\OrderDateGroup.cs" />
     <Compile Include="ViewModels\Orders.cs" />
     <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingCartUpdateViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
