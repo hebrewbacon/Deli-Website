@@ -169,9 +169,16 @@ namespace ItalianDeli.Controllers
                 //update the order status
                 if (order.OrderStatus == Common.Status.Cooking)
                 {
-                    order.OrderStatus = Common.Status.ReadyForPickup;
+                    if (order.DeliveryOption == Common.DeliveryOption.Pickup)
+                    {
+                        order.OrderStatus = Common.Status.ReadyForPickup;
+                    }
+                    else
+                    {
+                        order.OrderStatus = Common.Status.Delivery;
+                    }
                 }
-                else if (order.OrderStatus == Common.Status.ReadyForPickup)
+                else if (order.OrderStatus == Common.Status.Delivery)
                 {
                     order.OrderStatus = Common.Status.Complete;
                 }

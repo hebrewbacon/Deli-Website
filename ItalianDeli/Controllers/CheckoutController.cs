@@ -44,10 +44,13 @@ namespace ItalianDeli.Controllers
         {
             ViewBag.CreditCardTypes = CreditCardTypes;
             string result =  values[9];
+            string deliveryType = values[11];
 
             var checkoutViewModel = new CheckoutViewModel();
             TryUpdateModel(checkoutViewModel);
             checkoutViewModel.Order.CreditCard = result;
+
+            checkoutViewModel.Order.DeliveryOption = Convert.ToInt32(deliveryType) == 0 ? Common.DeliveryOption.Pickup : Common.DeliveryOption.Delivery;
 
             try
             {

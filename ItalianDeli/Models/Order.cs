@@ -26,6 +26,9 @@ namespace ItalianDeli.Models
         public Status OrderStatus { get; set; }
 
         [ScaffoldColumn(false)]
+        public DeliveryOption DeliveryOption { get; set; }
+
+        [ScaffoldColumn(false)]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "First Name is required")]
@@ -77,6 +80,10 @@ namespace ItalianDeli.Models
         [Display(Name = "Credit Card Type")]
         [NotMapped]
         public String CcType { get; set; }
+
+        [Display(Name = "Pickup Option")]
+        [NotMapped]
+        public List<string> PickupType { get; set; }
 
         public bool SaveInfo { get; set; }
 

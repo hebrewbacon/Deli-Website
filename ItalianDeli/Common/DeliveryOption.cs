@@ -5,11 +5,9 @@ using System.Web;
 
 namespace ItalianDeli.Common
 {
-    public enum Status
+    public enum DeliveryOption
     {
-        Cooking = 0,
-        ReadyForPickup = 1,
-        Delivery = 2,
-        Complete = 3
+        Pickup = 0,
+        Delivery = 1
     }
 }

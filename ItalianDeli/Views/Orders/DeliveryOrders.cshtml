@@ -9,7 +9,7 @@
 <table class="table table-striped table-hover">
     @foreach (var item in Model.Order)
     {
-        if (item.OrderStatus == ItalianDeli.Common.Status.ReadyForPickup) { 
+        if (item.OrderStatus == ItalianDeli.Common.Status.Delivery) { 
             foreach (var itemdetail in item.OrderDetails)
             {
                 <tr>
