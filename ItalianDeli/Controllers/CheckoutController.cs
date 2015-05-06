@@ -110,7 +110,7 @@ namespace ItalianDeli.Controllers
                     CheckoutController.SendOrderMessage(checkoutViewModel.Order.FirstName, "New Order: " + checkoutViewModel.Order.OrderId, checkoutViewModel.Order.ToString(checkoutViewModel.Order), appConfig.OrderEmail);
 
                     return RedirectToAction("Complete",
-                        new { id = checkoutViewModel.Order.OrderId, orderType = checkoutViewModel.OrderType });
+                        new { id = checkoutViewModel.Order.OrderId });
                 
             }
             catch(Exception ex)
@@ -135,7 +135,7 @@ namespace ItalianDeli.Controllers
 
         //
         // GET: /Checkout/Complete
-        public ActionResult Complete(int id, string orderType)
+        public ActionResult Complete(int id)
         {
             // Validate customer owns this order
             bool isValid = storeDB.Orders.Any(
@@ -144,12 +144,7 @@ namespace ItalianDeli.Controllers
 
             if (isValid)
             {
-                CompleteOrderViewodel completeOrderViewodel = new CompleteOrderViewodel()
-                {
-                    completeOrderId = id,
-                    completeOrderType = orderType
-                };
-                return View(completeOrderViewodel);
+                return View(id);
             }
             else
             {

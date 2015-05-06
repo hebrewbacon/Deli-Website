@@ -1,17 +1,9 @@
-﻿@model ItalianDeli.Models.CompleteOrderViewodel
+﻿@model int
 @{
     ViewBag.Title = "Checkout Complete";
 }
 <h2>Checkout Complete</h2>
-<p>Thanks for your order! Your order number is: @Model.completeOrderId</p>
-@if(Model.completeOrderType == "pickup")
-{
-    <p>Your order will be ready for pickup shortly.</p>
-}
-else if (Model.completeOrderType == "delivery")
-{
-    <p>Your order will be delivered your way shortly.</p>
-}
+<p>Thanks for your order! Your order number is: @Model</p>
 <p>
     How about shopping for some more stuff in our
     @Html.ActionLink("store","Index", "Home")
