@@ -48,10 +48,11 @@
     </div>
 </div>
 
-<div id="browseMenuButtonContainer">
-    <button type="button" class="btn btn-primary btn-large" onclick="location.href='@Url.Action("Index", "Items")'">Browse our menu &raquo;</button>
-</div>
-
+@if (!User.IsInRole("Cook") && User.Identity.Name != "delivery@gmail.com") { 
+    <div id="browseMenuButtonContainer">
+        <button type="button" class="btn btn-primary btn-large" onclick="location.href='@Url.Action("Index", "Items")'">Browse our menu &raquo;</button>
+    </div>
+}
 <div class="row">
     <div class="col-md-4">
 
