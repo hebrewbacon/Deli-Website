@@ -147,6 +147,9 @@
 
             
             <br>
+            @Html.RadioButtonFor(model => model.OrderType, "pickup", new { @checked = "checked"})<span>Pickup</span>
+            @Html.RadioButtonFor(model => model.OrderType, "delivery")<span>Delivery</span>
+            <br>
 
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-8">
