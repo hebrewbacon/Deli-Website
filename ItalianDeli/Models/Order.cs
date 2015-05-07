@@ -58,7 +58,7 @@ namespace ItalianDeli.Models
         [StringLength(10)]
         public string PostalCode { get; set; }
 
-        [Required(ErrorMessage = "Country is required")]
+        [Required]
         [StringLength(40)]
         public string Country { get; set; }
 

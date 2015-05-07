@@ -7,12 +7,27 @@
 <h2>Details</h2>
 
 <table class="table table-striped table-hover">
+    <tr>
+        <th>
+            OrderID
+        </th>
+        <th>
+            Item Name
+        </th>
+        <th>
+            Quantity
+        </th>
+    </tr>
     @foreach (var item in Model.Order)
     {
-        if (item.OrderStatus == ItalianDeli.Common.Status.Cooking) { 
+        if (item.OrderStatus == ItalianDeli.Common.Status.Cooking)
+        {
             foreach (var itemdetail in item.OrderDetails)
-            {  
+            {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemdetail.OrderId)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => itemdetail.Item.Name)
                     </td>
@@ -23,7 +38,7 @@
             }
             <tr>
                 <td>
-                    @Html.ActionLink("Update Order Status", "Update", new { id = item.OrderId })
+                    @Html.ActionLink("Update Order Status", "Update", new {id = item.OrderId})
                 </td>
             </tr>
         }

@@ -24,6 +24,7 @@ namespace ItalianDeli.Controllers
                 CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal()
             };
+            HttpContext.Session["CartTotal"] = cart.GetTotal();
             // Return the view
             return View(viewModel);
         }
@@ -51,6 +52,7 @@ namespace ItalianDeli.Controllers
                 ItemCount = count,
                 DeleteId = id
             };
+            HttpContext.Session["CartTotal"] = cart.GetTotal();
             return Json(results);
 
             // Go back to the main store page for more shopping
@@ -83,6 +85,7 @@ namespace ItalianDeli.Controllers
                     ItemCount = itemCount,
                     DeleteId = id
                 };
+                HttpContext.Session["CartTotal"] = cart.GetTotal();
                 return Json(results);
             }
         }
@@ -115,6 +118,7 @@ namespace ItalianDeli.Controllers
                 ItemCount = itemCount,
                 DeleteId = id
             };
+            HttpContext.Session["CartTotal"] = cart.GetTotal();
             return Json(results);
         }
         //

@@ -54,73 +54,78 @@ namespace ItalianDeli.Controllers
 
             try
             {
-                    checkoutViewModel.Order.Username = User.Identity.Name;
-                    checkoutViewModel.Order.Email = User.Identity.Name;
-                    checkoutViewModel.Order.OrderDate = DateTime.Now;
+                checkoutViewModel.Order.Username = User.Identity.Name;
+                checkoutViewModel.Order.Email = User.Identity.Name;
+                checkoutViewModel.Order.OrderDate = DateTime.Now;
 
-                    /*
+                /*
                      * Alot of repition but just added this to make saving to db work coz without it its throwing exception
                      * errors for required fields
-                     */ 
-                    checkoutViewModel.Order.Address = checkoutViewModel.User.Address;
-                    checkoutViewModel.Order.City = checkoutViewModel.User.City;
-                    checkoutViewModel.Order.Country = checkoutViewModel.User.Country;
-                    checkoutViewModel.Order.State = checkoutViewModel.User.State;
-                    checkoutViewModel.Order.Phone = checkoutViewModel.User.Phone;
-                    checkoutViewModel.Order.PostalCode = checkoutViewModel.User.PostalCode;
-                    checkoutViewModel.Order.FirstName = checkoutViewModel.User.FirstName;
-                    checkoutViewModel.Order.LastName = checkoutViewModel.User.LastName;
+                     */
+                checkoutViewModel.Order.Address = checkoutViewModel.Order.Address;
+                checkoutViewModel.Order.City = checkoutViewModel.Order.City;
+                checkoutViewModel.Order.Country = checkoutViewModel.Order.Country;
+                checkoutViewModel.Order.State = checkoutViewModel.Order.State;
+                checkoutViewModel.Order.Phone = checkoutViewModel.Order.Phone;
+                checkoutViewModel.Order.PostalCode = checkoutViewModel.Order.PostalCode;
+                checkoutViewModel.Order.FirstName = checkoutViewModel.Order.FirstName;
+                checkoutViewModel.Order.LastName = checkoutViewModel.Order.LastName;
+                checkoutViewModel.Order.Total = (decimal) HttpContext.Session["CartTotal"];
 
-                    var currentUserId = User.Identity.GetUserId();
-                    if (checkoutViewModel.Order.SaveInfo && !checkoutViewModel.Order.Username.Equals("guest@guest.com"))
-                    {
-                        
-                        var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                        var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
-                        var ctx = store.Context;
-                        var currentUser = manager.FindById(User.Identity.GetUserId());
+                var currentUserId = User.Identity.GetUserId();
+                if (checkoutViewModel.Order.SaveInfo && !checkoutViewModel.Order.Username.Equals("guest@guest.com"))
+                {
 
-                        currentUser.Address = checkoutViewModel.User.Address;
-                        currentUser.City = checkoutViewModel.User.City;
-                        currentUser.Country = checkoutViewModel.User.Country;
-                        currentUser.State = checkoutViewModel.User.State;
-                        currentUser.Phone = checkoutViewModel.User.Phone;
-                        currentUser.PostalCode = checkoutViewModel.User.PostalCode;
-                        currentUser.FirstName = checkoutViewModel.User.FirstName;
-                        currentUser.LastName = checkoutViewModel.User.LastName;
+                    var manager =
+                        new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+                    var ctx = store.Context;
+                    var currentUser = manager.FindById(User.Identity.GetUserId());
 
-                        //Save this back
-                        //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
-                        //var result = await UserManager.UpdateAsync(currentUser);
-                        await ctx.SaveChangesAsync();
+                    currentUser.Address = checkoutViewModel.Order.Address;
+                    currentUser.City = checkoutViewModel.Order.City;
+                    currentUser.Country = checkoutViewModel.Order.Country;
+                    currentUser.State = checkoutViewModel.Order.State;
+                    currentUser.Phone = checkoutViewModel.Order.Phone;
+                    currentUser.PostalCode = checkoutViewModel.Order.PostalCode;
+                    currentUser.FirstName = checkoutViewModel.Order.FirstName;
+                    currentUser.LastName = checkoutViewModel.Order.LastName;
 
-                        await storeDB.SaveChangesAsync();
-                    }
-                    
+                    //Save this back
+                    //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
+                    //var result = await UserManager.UpdateAsync(currentUser);
+                    await ctx.SaveChangesAsync();
 
-                    //Save Order
-                    storeDB.Orders.Add(checkoutViewModel.Order);
                     await storeDB.SaveChangesAsync();
-                    //Process the order
-                    var cart = ShoppingCart.GetCart(this.HttpContext);
-                    checkoutViewModel.Order = cart.CreateOrder(checkoutViewModel.Order);
+                }
+
+
+                //Save Order
+                storeDB.Orders.Add(checkoutViewModel.Order);
+                await storeDB.SaveChangesAsync();
+                //Process the order
+                var cart = ShoppingCart.GetCart(this.HttpContext);
+                checkoutViewModel.Order = cart.CreateOrder(checkoutViewModel.Order);
 
 
 
-                    CheckoutController.SendOrderMessage(checkoutViewModel.Order.FirstName, "New Order: " + checkoutViewModel.Order.OrderId, checkoutViewModel.Order.ToString(checkoutViewModel.Order), appConfig.OrderEmail);
+                CheckoutController.SendOrderMessage(checkoutViewModel.Order.FirstName,
+                    "New Order: " + checkoutViewModel.Order.OrderId,
+                    checkoutViewModel.Order.ToString(checkoutViewModel.Order), appConfig.OrderEmail);
 
-                    return RedirectToAction("Complete",
-                        new { id = checkoutViewModel.Order.OrderId });
-                
+                return RedirectToAction("Complete",
+                    new {id = checkoutViewModel.Order.OrderId});
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex is System.Data.Entity.Validation.DbEntityValidationException)
                 {
                     // Retrieve the error messages as a list of strings.
-                    var errorMessages = (ex as System.Data.Entity.Validation.DbEntityValidationException).EntityValidationErrors
-                            .SelectMany(x => x.ValidationErrors)
-                            .Select(x => x.ErrorMessage);
+                    var errorMessages = (ex as System.Data.Entity.Validation.DbEntityValidationException)
+                        .EntityValidationErrors
+                        .SelectMany(x => x.ValidationErrors)
+                        .Select(x => x.ErrorMessage);
 
                     // Join the list to a single string.
                     var fullErrorMessage = string.Join("; ", errorMessages);

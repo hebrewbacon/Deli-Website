@@ -38,13 +38,22 @@ namespace ItalianDeli.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var orders = from o in db.Orders.Where(x => x.Username == User.Identity.Name)
-                        select o;
-
+            IQueryable<Order> orders;
+            if (User.IsInRole("Admin"))
+            {
+                orders = from o in db.Orders
+                    select o;
+            }
+            else
+            {
+                orders = from o in db.Orders.Where(x => x.Username == User.Identity.Name)
+                    select o;
+            }
             if (!String.IsNullOrEmpty(searchString))
             {
-                orders = orders.Where(s => s.FirstName.ToUpper().Contains(searchString.ToUpper())
-                                       || s.LastName.ToUpper().Contains(searchString.ToUpper()));
+                //orders = orders.Where(s => s.FirstName.ToUpper().Contains(searchString.ToUpper())
+                //                       || s.LastName.ToUpper().Contains(searchString.ToUpper()));
+                orders = orders.Where(s => s.OrderId.ToString().ToLower() == searchString.ToLower());
             }
             switch (sortOrder)
             {

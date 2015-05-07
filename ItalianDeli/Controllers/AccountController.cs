@@ -435,6 +435,8 @@ namespace ItalianDeli.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+            cart.EmptyCart();
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
