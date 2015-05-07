@@ -44,7 +44,7 @@ namespace ItalianDeli.Controllers
         {
             ViewBag.CreditCardTypes = CreditCardTypes;
             string result =  values[9];
-            string deliveryType = values[11];
+            string deliveryType = values[10];
 
             var checkoutViewModel = new CheckoutViewModel();
             TryUpdateModel(checkoutViewModel);
@@ -72,32 +72,32 @@ namespace ItalianDeli.Controllers
                 checkoutViewModel.Order.LastName = checkoutViewModel.Order.LastName;
                 checkoutViewModel.Order.Total = (decimal) HttpContext.Session["CartTotal"];
 
-                var currentUserId = User.Identity.GetUserId();
-                if (checkoutViewModel.Order.SaveInfo && !checkoutViewModel.Order.Username.Equals("guest@guest.com"))
-                {
+                //var currentUserId = User.Identity.GetUserId();
+                //if (checkoutViewModel.Order.SaveInfo && !checkoutViewModel.Order.Username.Equals("guest@guest.com"))
+                //{
 
-                    var manager =
-                        new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                    var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
-                    var ctx = store.Context;
-                    var currentUser = manager.FindById(User.Identity.GetUserId());
+                //    var manager =
+                //        new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                //    var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+                //    var ctx = store.Context;
+                //    var currentUser = manager.FindById(User.Identity.GetUserId());
 
-                    currentUser.Address = checkoutViewModel.Order.Address;
-                    currentUser.City = checkoutViewModel.Order.City;
-                    currentUser.Country = checkoutViewModel.Order.Country;
-                    currentUser.State = checkoutViewModel.Order.State;
-                    currentUser.Phone = checkoutViewModel.Order.Phone;
-                    currentUser.PostalCode = checkoutViewModel.Order.PostalCode;
-                    currentUser.FirstName = checkoutViewModel.Order.FirstName;
-                    currentUser.LastName = checkoutViewModel.Order.LastName;
+                //    currentUser.Address = checkoutViewModel.Order.Address;
+                //    currentUser.City = checkoutViewModel.Order.City;
+                //    currentUser.Country = checkoutViewModel.Order.Country;
+                //    currentUser.State = checkoutViewModel.Order.State;
+                //    currentUser.Phone = checkoutViewModel.Order.Phone;
+                //    currentUser.PostalCode = checkoutViewModel.Order.PostalCode;
+                //    currentUser.FirstName = checkoutViewModel.Order.FirstName;
+                //    currentUser.LastName = checkoutViewModel.Order.LastName;
 
-                    //Save this back
-                    //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
-                    //var result = await UserManager.UpdateAsync(currentUser);
-                    await ctx.SaveChangesAsync();
+                //    //Save this back
+                //    //http://stackoverflow.com/questions/20444022/updating-user-data-asp-net-identity
+                //    //var result = await UserManager.UpdateAsync(currentUser);
+                //    await ctx.SaveChangesAsync();
 
-                    await storeDB.SaveChangesAsync();
-                }
+                //    await storeDB.SaveChangesAsync();
+                //}
 
 
                 //Save Order
