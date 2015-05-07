@@ -68,7 +68,7 @@ namespace ItalianDeli.Controllers
             {
                 return RemoveFromCart(id);
             }
-            else
+            else if (quantity > 0)
             {
                 string itemName = storeDB.Items
                     .Single(item => item.ID == id).Name;
@@ -79,10 +79,23 @@ namespace ItalianDeli.Controllers
                 var results = new ShoppingCartUpdateViewModel
                 {
                     Message = Server.HtmlEncode(itemName) +
-                        " has updated in your shopping cart.",
+                              " has updated in your shopping cart.",
                     CartTotal = cart.GetTotal(),
                     CartCount = cart.GetCount(),
                     ItemCount = itemCount,
+                    DeleteId = id
+                };
+                HttpContext.Session["CartTotal"] = cart.GetTotal();
+                return Json(results);
+            }
+            else
+            {
+                var results = new ShoppingCartUpdateViewModel
+                {
+                    Message = Server.HtmlEncode("Please enter a quantity greater than or equal to 0"),
+                    CartTotal = cart.GetTotal(),
+                    CartCount = cart.GetCount(),
+                    ItemCount = cart.GetItemCount(id),
                     DeleteId = id
                 };
                 HttpContext.Session["CartTotal"] = cart.GetTotal();

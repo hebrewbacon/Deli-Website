@@ -56,6 +56,15 @@ namespace ItalianDeli.Models
             return cartItem.Count;
         }
 
+        public int GetItemCount(int id)
+        {
+            var cartItem = storeDB.Carts.Single(
+                cart => cart.CartId == ShoppingCartId
+                && cart.ItemId == id);
+
+            return cartItem.Count;
+        }
+
         public int UpdateCart(int id, int quantity)
         {
             var cartItem = storeDB.Carts.Single(

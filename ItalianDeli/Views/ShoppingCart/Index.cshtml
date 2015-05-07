@@ -38,20 +38,24 @@
         $(".UpdateLink").click(function () {
             var recordToUpdate = $(this).attr("data-id");
             var quantity = $("#CartQuantity" + recordToUpdate).val();
-            $.post("/ShoppingCart/UpdateCart", { "id": recordToUpdate, "quantity": quantity },
-                function (data) {
-                    if (data.ItemCount == 0) {
-                        $('#row-' + data.DeleteId).fadeOut('slow');
-                    }
-                    $('#cart-total').html("<span>$</span>" + data.CartTotal);
-                    $('#update-message').text(data.Message);
-                    if (data.CartCount > 0) {
-                        $('#cart-status').text(data.CartCount);
-                    }
-                    else {
-                        $('#cart-status').text('');
-                    }
-                });
+            //if (quantity >= 0) {
+                $.post("/ShoppingCart/UpdateCart", { "id": recordToUpdate, "quantity": quantity },
+                    function(data) {
+                        if (data.ItemCount == 0) {
+                            $('#row-' + data.DeleteId).fadeOut('slow');
+                        }
+                        $('#cart-total').html("<span>$</span>" + data.CartTotal);
+                        $('#update-message').text(data.Message);
+                        $("#QuantityError" + recordToUpdate).css('visibility', 'hidden');
+                        if (data.CartCount > 0) {
+                            $('#cart-status').text(data.CartCount);
+                        } else {
+                            $('#cart-status').text('');
+                        }
+                    });
+            //} else {
+            //    $("#QuantityError" + recordToUpdate).css('visibility', 'visible');
+            //}
         });
     });
 </script>
@@ -107,6 +111,9 @@
                                     Update Quantity
                                 </a>
                             </td>
+                            @*<td id="QuantityError@item.ItemId" style="visibility: hidden">
+                                Please enter a quantity greater than or equal to 0
+                            </td>*@
                             <td>
                                 <a href="#" class="RemoveLink"
                                    data-id="@item.ItemId">
