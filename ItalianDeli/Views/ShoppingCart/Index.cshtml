@@ -37,7 +37,7 @@
 
         $(".UpdateLink").click(function () {
             var recordToUpdate = $(this).attr("data-id");
-            var quantity = $("#CartQuantity").val();
+            var quantity = $("#CartQuantity" + recordToUpdate).val();
             $.post("/ShoppingCart/UpdateCart", { "id": recordToUpdate, "quantity": quantity },
                 function (data) {
                     if (data.ItemCount == 0) {
@@ -99,7 +99,7 @@
                                 @item.Count
                             </td>*@
                             <td id="item-count-@item.ItemId">
-                                @Html.TextBox("CartQuantity", @item.Count)
+                                @Html.TextBox("CartQuantity" + @item.ItemId, @item.Count)
                             </td>
                             <td>
                                 <a href="#" class="UpdateLink"
