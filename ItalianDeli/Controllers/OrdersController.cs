@@ -166,9 +166,11 @@ namespace ItalianDeli.Controllers
                 {
                     return HttpNotFound();
                 }
+                bool returnPage = false;
                 //update the order status
                 if (order.OrderStatus == Common.Status.Cooking)
                 {
+                    returnPage = true;
                     if (order.DeliveryOption == Common.DeliveryOption.Pickup)
                     {
                         order.OrderStatus = Common.Status.ReadyForPickup;
@@ -186,7 +188,15 @@ namespace ItalianDeli.Controllers
                 await db.SaveChangesAsync();
 
                 //query the db again and return the list of orders wrapped in the order viewmodel
-                List<Order> orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+                List<Order> orders;
+                if (returnPage)
+                {
+                    orders = db.Orders.Where(x => x.OrderStatus == 0).ToList();
+                }
+                else
+                {
+                    orders = db.Orders.Where(x => (int)x.OrderStatus == 2).ToList();
+                }
 
                 foreach (var ord in orders)
                 {
@@ -197,7 +207,7 @@ namespace ItalianDeli.Controllers
                 {
                     Order = orders
                 };
-                if (order.OrderStatus == Common.Status.ReadyForPickup)
+                if (returnPage)
                 {
                     return View("CookOrders", orderList);
                 }
@@ -252,7 +262,7 @@ namespace ItalianDeli.Controllers
         public ActionResult DeliveryOrders()
         {
             //query the db again and return the list of orders wrapped in the order viewmodel
-            List<Order> orders = db.Orders.Where(x => (int)x.OrderStatus == 1).ToList();
+            List<Order> orders = db.Orders.Where(x => (int)x.OrderStatus == 2).ToList();
 
             foreach (var order in orders)
             {

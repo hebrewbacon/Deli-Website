@@ -83,7 +83,7 @@ namespace ItalianDeli.Models
 
         [Display(Name = "Pickup Option")]
         [NotMapped]
-        public List<string> PickupType { get; set; }
+        public Dictionary<int, string> PickupType { get; set; }
 
         public bool SaveInfo { get; set; }
 
@@ -97,8 +97,6 @@ namespace ItalianDeli.Models
         [ScaffoldColumn(false)]
         public decimal Total { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
-
-       
 
         public string ToString(Order order)
         {

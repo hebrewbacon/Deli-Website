@@ -19,11 +19,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => itemdetail.Quantity)
                     </td>
-                    <td>
-                        @Html.ActionLink("Update Order Status", "Update", new { id = item.OrderId })
-                    </td>
                 </tr>
             }
+            <tr>
+                <td>
+                    @Html.ActionLink("Update Order Status", "Update", new { id = item.OrderId })
+                </td>
+            </tr>
         }
     }
 </table>

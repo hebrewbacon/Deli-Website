@@ -147,13 +147,11 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Order.PickupType, htmlAttributes: new { @class = "col-lg-2 control-label" })
                 <div class="col-lg-10">
-                    @Html.DropDownListFor(model => model.Order.PickupType,
+                    @Html.DropDownListFor(model => model.PickupType,
                                         new SelectList(
-                                            new List<Object> {
-                                                new {value = 0, text = "Pickup"},
-                                                new {value = 1, text= "Delivery"}
-                                            },
-                                            "value", "text", Model.Order.PickupType))
+                                            Model.PickupType,
+                                                "Key",
+                                                "Value"))
                 </div>
             </div>
             <br>
